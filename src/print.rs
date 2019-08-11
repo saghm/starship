@@ -20,6 +20,7 @@ const PROMPT_ORDER: &[&str] = &[
     "go",
     "cmd_duration",
     "line_break",
+    "time",
     "character",
 ];
 

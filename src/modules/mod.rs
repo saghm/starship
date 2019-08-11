@@ -10,6 +10,7 @@ mod nodejs;
 mod package;
 mod python;
 mod rust;
+mod time;
 mod username;
 
 use crate::context::Context;
@@ -30,6 +31,7 @@ pub fn handle<'a>(module: &str, context: &'a Context) -> Option<Module<'a>> {
         "username" => username::module(context),
         "battery" => battery::module(context),
         "cmd_duration" => cmd_duration::module(context),
+        "time" => time::module(context),
 
         _ => panic!("Unknown module: {}", module),
     }
