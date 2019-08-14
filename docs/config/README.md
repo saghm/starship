@@ -119,10 +119,15 @@ The `cmd_duration` module shows how long the last command took to execute.
 The module will be shown only if the command took longer than two seconds, or
 the `min_time` config value, if it exists.
 
-::: warning NOTE
-Command duration is currently not supported in `bash`. See
-[this issue](https://github.com/starship/starship/issues/124) for more details.
+::: warning Do Not Hook the DEBUG trap in Bash
+If you are running Starship in `bash`, do not hook the `DEBUG` trap after running
+`eval $(starship init $0)`, or this module **will** break.
 :::
+
+Bash users who need preexec-like functionality can use
+[rcaloras's bash_preexec framework](https://github.com/rcaloras/bash-preexec).
+Simply define the arrays `preexec_functions` and `precmd_functions` before 
+running `eval $(starship init $0)`, and then proceed as normal.
 
 ### Options
 
@@ -290,6 +295,29 @@ The `line_break` module separates the prompt into two lines.
 
 [line_break]
 disabled = true
+```
+
+## Ruby
+
+The `ruby` module shows the currently installed version of NodeJS.
+The module will be shown if any of the following conditions are met:
+
+- The current directory contains a `Gemfile` file
+- The current directory contains a `.rb` file
+
+### Options
+
+| Variable   | Default | Description                                              |
+| ---------- | ------- | -------------------------------------------------------- |
+| `disabled` | `false` | Disables the `ruby` module.                              |
+
+### Example
+
+```toml
+# ~/.config/starship.toml
+
+[ruby]
+disabled = false
 ```
 
 ## NodeJS
